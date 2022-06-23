@@ -2,7 +2,10 @@
   <q-page padding>
     <input @keyup="handleKeyUp" v-model="message" type="text" />
     <button @click="clearMessage">Clear</button>
-    <h5 class="border-grey" v-show="message.length">{{ message }}</h5>
+    <h5 v-if="message.length" class="border-grey" >{{ message }}</h5>
+    <h6 v-else>No message entered 😢</h6>
+    <hr>
+    <p>Uppercased Message: {{messageUppercase()}}</p>
   </q-page>
 </template>
 
@@ -25,6 +28,9 @@ export default {
         alert(this.message);
       }
     },
+    messageUppercase(){
+      return this.message.toUpperCase()
+    }
   },
 };
 </script>
