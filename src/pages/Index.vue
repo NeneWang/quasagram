@@ -2,7 +2,7 @@
   <q-page padding>
     <input @keyup="handleKeyUp" v-model="message" type="text" />
     <button @click="clearMessage">Clear</button>
-    <h5>{{ message }}</h5>
+    <h5 class="border-grey" v-show="message.length">{{ message }}</h5>
   </q-page>
 </template>
 
@@ -14,20 +14,23 @@ export default {
     };
   },
   methods: {
-    clearMessage(){
-      this.message = ''
+    clearMessage() {
+      this.message = "";
     },
-    handleKeyUp(e){
-      console.log(e)
-      if(e.keyCode == 27){
-        this.clearMessage()
+    handleKeyUp(e) {
+      console.log(e);
+      if (e.keyCode == 27) {
+        this.clearMessage();
+      } else if (e.keyCode == 13) {
+        alert(this.message);
       }
-      else if(e.keyCode == 13){
-        alert(this.message)
-      }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+.border-grey {
+  border: 1px solid grey;
+}
+</style>
