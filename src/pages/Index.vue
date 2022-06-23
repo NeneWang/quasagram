@@ -5,7 +5,7 @@
         v-for="(task, index) in tasks"
         :task="task"
         :index="index"
-        ></task>
+        >Something Insde the Slot for {{task.name}}</task>
     </ul>
   </q-page>
 </template>
