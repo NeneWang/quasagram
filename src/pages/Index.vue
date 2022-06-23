@@ -17,11 +17,7 @@
       {{message.length}}
     </div>
 
-    <h5 v-if="message.length" class="border-grey">{{ message }}</h5>
-    <h6 v-else>No message entered 😢</h6>
-    <hr />
-    <p>Uppercased Message: {{ messageUppercase }}</p>
-    <p>Lowercase Message: {{ message | messageLowercase }}</p>
+
   </q-page>
 </template>
 
