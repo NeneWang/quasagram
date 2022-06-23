@@ -8,7 +8,7 @@
       @keyup="handleKeyUp"
       v-model="message"
       type="text"
-      v-bind:class="{'error': message.length > 22 }"
+      :style="errorStyle"
     />
     <button @click="clearMessage">Clear</button>
 
@@ -37,6 +37,11 @@ export default {
       console.log("MessageUppercase was fired");
       return this.message.toUpperCase();
     },
+    errorStyle(){
+      if(this.message.length > 22){
+        return 'color: red;'
+      }
+    }
   },
   methods: {
     clearMessage() {
