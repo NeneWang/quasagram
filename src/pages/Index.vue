@@ -3,13 +3,20 @@
     <button style="position: absolute; right: 10px" @click="counter++">
       {{ counter }}
     </button>
-    <input v-autofocus @keyup="handleKeyUp" v-model="message" type="text" />
+    <input
+      v-autofocus
+      @keyup="handleKeyUp"
+      v-model="message"
+      type="text"
+      class="error"
+      v-bind:class="{'error': message.length > 22 }"
+    />
     <button @click="clearMessage">Clear</button>
     <h5 v-if="message.length" class="border-grey">{{ message }}</h5>
     <h6 v-else>No message entered 😢</h6>
     <hr />
     <p>Uppercased Message: {{ messageUppercase }}</p>
-    <p> Lowercase Message: {{message | messageLowercase }} </p>
+    <p>Lowercase Message: {{ message | messageLowercase }}</p>
   </q-page>
 </template>
 
@@ -23,7 +30,7 @@ export default {
   },
   computed: {
     messageUppercase() {
-      console.log('MessageUppercase was fired')
+      console.log("MessageUppercase was fired");
       return this.message.toUpperCase();
     },
   },
@@ -41,23 +48,33 @@ export default {
     },
   },
   filters: {
-    messageLowercase(value){
-      return value.toLowerCase()
-    }
+    messageLowercase(value) {
+      return value.toLowerCase();
+    },
   },
   directives: {
     autofocus: {
-      inserted(el){
-        console.log("directive fired")
-        el.focus()
-      }
-    }
-  }
+      inserted(el) {
+        console.log("directive fired");
+        el.focus();
+      },
+    },
+  },
 };
 </script>
 
 <style>
 .border-grey {
   border: 1px solid grey;
+}
+
+input,
+button {
+  font-size: 23px;
+}
+
+.error {
+  color: red;
+  background: pink;
 }
 </style>
