@@ -9,6 +9,7 @@
       v-model="message"
       type="text"
       :style="errorStyle"
+      ref="messageInput"
     />
     <button @click="clearMessage">Clear</button>
 
@@ -69,6 +70,10 @@ export default {
       },
     },
   },
+  mounted(){
+    console.log(this.$refs)
+    this.$refs.messageInput.className = 'bg-green'
+  }
 };
 </script>
 
