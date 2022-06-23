@@ -3,7 +3,7 @@
     <button style="position: absolute; right: 10px" @click="counter++">
       {{ counter }}
     </button>
-    <input @keyup="handleKeyUp" v-model="message" type="text" />
+    <input v-autofocus @keyup="handleKeyUp" v-model="message" type="text" />
     <button @click="clearMessage">Clear</button>
     <h5 v-if="message.length" class="border-grey">{{ message }}</h5>
     <h6 v-else>No message entered 😢</h6>
@@ -48,6 +48,7 @@ export default {
   directives: {
     autofocus: {
       inserted(el){
+        console.log("directive fired")
         el.focus()
       }
     }
