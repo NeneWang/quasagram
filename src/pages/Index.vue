@@ -1,53 +1,94 @@
 <template>
   <q-page padding>
-    <ul>
-      <task
-        v-for="(task, index) in tasks"
-        :key="task.id"
-        :task="task"
-        :index="index"
-        >Something Insde the Slot for {{ task.name }}</task
-      >
-    </ul>
+    <button style="position: absolute; right: 10px" @click="counter++">
+      {{ counter }}
+    </button>
+    <input
+      v-autofocus
+      @keyup="handleKeyUp"
+      v-model="message"
+      type="text"
+      :style="errorStyle"
+      ref="messageInput"
+    />
+    <button @click="clearMessage">Clear</button>
+
+    <div>
+      {{message.length}}
+    </div>
+
+    <h5 v-if="message.length" class="border-grey">{{ message }}</h5>
+    <h6 v-else>No message entered 😢</h6>
+    <hr />
+    <p>Uppercased Message: {{ messageUppercase }}</p>
+    <p>Lowercase Message: {{ message | messageLowercase }}</p>
   </q-page>
 </template>
 
 <script>
-import Task from "components/Task.vue";
-
 export default {
   data() {
     return {
-      tasks: [
-        {
-          id: 1,
-          name: "Go to shop",
-          dueDate: "2019/05/12",
-          dueTime: "18:30",
-        },
-        {
-          id: 2,
-          name: "Get Bananas",
-          dueDate: "2019/05/13",
-          dueTime: "14:00",
-        },
-        {
-          id: 3,
-          name: "Get Apples",
-          dueDate: "2019/05/14",
-          dueTime: "16:00",
-        },
-      ],
+      message: "I love Vue.js",
+      counter: 0,
     };
   },
+  computed: {
+    messageUppercase() {
+      console.log("MessageUppercase was fired");
+      return this.message.toUpperCase();
+    },
+    errorStyle(){
+      if(this.message.length > 22){
+        return 'color: red;'
+      }
+    }
+  },
   methods: {
-    deleteTask(index) {
-      this.tasks.splice(index, 1);
-      // The 1 means that only 1 item will be deleted
+    clearMessage() {
+      this.message = "";
+    },
+    handleKeyUp(e) {
+      console.log(e);
+      if (e.keyCode == 27) {
+        this.clearMessage();
+      } else if (e.keyCode == 13) {
+        alert(this.message);
+      }
     },
   },
-  components: {
-    task: require("components/Task.vue").default,
+  filters: {
+    messageLowercase(value) {
+      return value.toLowerCase();
+    },
   },
+  directives: {
+    autofocus: {
+      inserted(el) {
+        console.log("directive fired");
+        el.focus();
+      },
+    },
+  },
+  mounted(){
+    console.log(this.$refs)
+    this.$refs.messageInput.className = 'bg-green'
+  }
 };
 </script>
+
+<style>
+.border-grey {
+  border: 1px solid grey;
+}
+
+input,
+button {
+  font-size: 23px;
+}
+
+.error {
+  color: red;
+  background: pink;
+}
+</style>
