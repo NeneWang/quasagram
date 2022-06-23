@@ -9,6 +9,7 @@
     <h6 v-else>No message entered 😢</h6>
     <hr />
     <p>Uppercased Message: {{ messageUppercase }}</p>
+    <p> Lowercase Message: {{message | messageLowercase }} </p>
   </q-page>
 </template>
 
@@ -39,6 +40,18 @@ export default {
       }
     },
   },
+  filters: {
+    messageLowercase(value){
+      return value.toLowerCase()
+    }
+  },
+  directives: {
+    autofocus: {
+      inserted(el){
+        el.focus()
+      }
+    }
+  }
 };
 </script>
 
