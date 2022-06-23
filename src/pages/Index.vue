@@ -10,7 +10,23 @@
 export default {
   data() {
     return {
-      tasks: ["Go to shop", "Get bananas", "Get apples"],
+      tasks: [
+        {
+          name: "Go to shop",
+          dueDate: "2019/05/12",
+          dueTime: "18:30",
+        },
+        {
+          name: "Get Bananas",
+          dueDate: "2019/05/13",
+          dueTime: "14:00",
+        },
+        {
+          name: "Get Apples",
+          dueDate: "2019/05/14",
+          dueTime: "16:00",
+        },
+      ],
     };
   },
 };
