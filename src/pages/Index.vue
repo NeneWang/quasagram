@@ -4,7 +4,7 @@
       <li v-for="task in tasks">
         <div>{{ task.name }}</div>
         <small>{{ task.dueDate }} @ {{task.dueTime}}</small>
-        <button>X</button>
+        <button @click="deleteTask" >X</button>
       </li>
     </ul>
   </q-page>
