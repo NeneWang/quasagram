@@ -1,7 +1,11 @@
 <template>
   <q-page padding>
     <ul>
-      <li v-for="task in tasks">{{ task }}</li>
+      <li v-for="task in tasks">
+        <div>{{ task.name }}</div>
+        <small>{{ task.dueDate }} @ {{task.dueTime}}</small>
+        <button>X</button>
+      </li>
     </ul>
   </q-page>
 </template>
@@ -29,5 +33,11 @@ export default {
       ],
     };
   },
+  methods: {
+    deleteTask(index) {
+      this.tasks.splice(index, 1)
+      // The 1 means that only 1 item will be deleted
+    }
+  }
 };
 </script>
