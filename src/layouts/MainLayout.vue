@@ -2,14 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" />
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
@@ -17,8 +10,8 @@
       </q-toolbar>
     </q-header>
 
-    <q-footer>
-      <q-tabs>
+    <q-footer class="bg-white">
+      <q-tabs class="text-grey-10" active-color="primary" indicator-color="transparent" >
         <q-route-tab to="/" icon="mail" label="Home" name="home" />
         <q-route-tab to="/camera" icon="alarm" label="Camera" name="camera" />
       </q-tabs>
