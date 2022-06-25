@@ -75,7 +75,7 @@ export default {
   },
   filters: {
     niceDate(value) {
-      return date.formatDate(timeStamp, "YYYY-MM-DDTHH:mm:ss.SSSZ");
+      return date.formatDate(value, "MMM d h:mm");
     },
   },
 };
