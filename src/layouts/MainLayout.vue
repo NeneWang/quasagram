@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" />
 
-        <q-toolbar-title class="text-center"> Quasar App </q-toolbar-title>
+        <q-toolbar-title class="text-grand-hotel text-bold "> Quasar App </q-toolbar-title>
 
       </q-toolbar>
     </q-header>
@@ -37,6 +37,7 @@ export default {
 
 <style lang="sass">
 .q-toolbar__title
+  font-size: 30px
   text-align: center
 
 .q-footer
