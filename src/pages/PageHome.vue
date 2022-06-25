@@ -1,6 +1,12 @@
 <template>
   <q-page class="constrain q-pa-md">
-    <q-card class="my-card" flat bordered>
+    <q-card
+      class="card-post q-mb-md"
+      v-for="post in posts"
+      :key="post.id"
+      flat
+      bordered
+    >
       <q-item>
         <q-item-section avatar>
           <q-avatar>
@@ -12,23 +18,25 @@
 
         <q-item-section>
           <q-item-label class="text-bold">Nelson__Wang</q-item-label>
-          <q-item-label caption> New York, United States </q-item-label>
+          <q-item-label caption> {{ post.location }} </q-item-label>
         </q-item-section>
       </q-item>
 
       <q-separator />
 
-      <q-img class="card-post" src="https://cdn.quasar.dev/img/parallax2.jpg" />
+      <q-img :src="post.imageUrl" />
 
       <q-card-section>
-        <div class="text-h6">Golden Gate Bridge</div>
-        <div class="text-GREY">June 10 9:04AM</div>
+        <div class="text-h6">{{ post.caption }}</div>
+        <div class="text-GREY">{{ post.date | niceDate }}</div>
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 
 <script>
+import { date } from "quasar";
+
 export default {
   name: "PageHome",
   data() {
@@ -43,7 +51,7 @@ export default {
         },
         {
           id: 2,
-          caption: "Golden Gate Bridge",
+          caption: "Aint a Gate Bridge",
           date: 1656193420878,
           location: "San Francisco, United States",
           imageUrl: "https://cdn.quasar.dev/img/parallax2.jpg",
@@ -64,6 +72,11 @@ export default {
         },
       ],
     };
+  },
+  filters: {
+    niceDate(value) {
+      return date.formatDate(timeStamp, "YYYY-MM-DDTHH:mm:ss.SSSZ");
+    },
   },
 };
 </script>
