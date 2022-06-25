@@ -2,14 +2,31 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn to="/camera" class="large-screen-only" flat icon="eva-camera-outline" size="18px" round dense/>
+        <q-btn
+          to="/camera"
+          class="large-screen-only"
+          flat
+          icon="eva-camera-outline"
+          size="18px"
+          round
+          dense
+        />
 
         <q-toolbar-title class="text-grand-hotel text-bold">
           Quasar App
         </q-toolbar-title>
-        
-        <q-btn to="/"  class="large-screen-only" flat icon="eva-home-outline" size="18px" round dense/>
 
+        <q-btn
+          to="/"
+          class="large-screen-only"
+          flat
+          icon="eva-home-outline"
+          size="18px"
+          round
+          dense
+        />
+
+        <q-separator inset vertical></q-separator>
       </q-toolbar>
     </q-header>
 
