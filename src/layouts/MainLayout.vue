@@ -1,13 +1,13 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header bg-white text-grey-10 >
       <q-toolbar>
         <q-btn
           to="/camera"
-          class="large-screen-only"
-          flat
+          class="large-screen-only q-mr-sm "
           icon="eva-camera-outline"
           size="18px"
+          flat
           round
           dense
         />
@@ -26,7 +26,7 @@
           dense
         />
 
-        <q-separator inset vertical></q-separator>
+        <q-separator vertical vertical></q-separator>
       </q-toolbar>
     </q-header>
 
@@ -57,6 +57,10 @@ export default {
 </script>
 
 <style lang="sass">
+
+
+
+
 .q-toolbar__title
   font-size: 30px
   text-align: center
