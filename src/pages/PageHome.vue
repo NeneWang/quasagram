@@ -10,26 +10,15 @@
         </q-item-section>
 
         <q-item-section>
-          <q-item-label>Nelosn__Wang</q-item-label>
+          <q-item-label class="text-bold" >Nelson__Wang</q-item-label>
           <q-item-label caption>
-            Subhead
+            New York, United States
           </q-item-label>
         </q-item-section>
       </q-item>
 
       <q-separator />
 
-      <q-card-section horizontal>
-        <q-card-section>
-            Lorem
-        </q-card-section>
-
-        <q-separator vertical />
-
-        <q-card-section class="col-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </q-card-section>
-      </q-card-section>
     </q-card>
 
   </q-page>
