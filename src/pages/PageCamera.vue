@@ -1,11 +1,17 @@
 <template>
   <q-page class="flex flex-center q-pa-md">
     <div class="camera-frame q-pa-md">
-      <img
+      <video 
+        class="full-width"
+        autoplay
+        ref="video"
+       />
+      
+      <!-- <img
         class="full-width"
         src="https://data.whicdn.com/images/342829695/original.jpg"
         alt=""
-      />
+      /> -->
       <div class="text-center q-pa-md v">
         <q-btn color="grey-10" icon="eva-camera" round size="lg" />
       </div>
@@ -45,6 +51,18 @@ export default {
       },
     };
   },
+  methods: {
+    initCamera(){
+        navigator.mediaDevices.getUserMedia({
+            video: true
+        }).then(stream => {
+            this.$refs.video.srcObject = stream
+        })
+    }
+  },
+  mounted(){
+    this.initCamera()
+  }
 };
 </script>
 
