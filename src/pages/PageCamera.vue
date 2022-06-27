@@ -6,24 +6,26 @@
         src="https://data.whicdn.com/images/342829695/original.jpg"
         alt=""
       />
-    </div>
-    <div class="text-center q-pa-md v">
-      <q-btn color="grey-10" icon="eva-camera" round size="lg" />
-    </div>
+      <div class="text-center q-pa-md v">
+        <q-btn color="grey-10" icon="eva-camera" round size="lg" />
+      </div>
 
-    <div class="row justify-center q-ma-md">
-      <q-input v-model="text" class="col" label="Caption" dense />
-    </div>
+      <div class="row justify-center q-ma-md">
+        <q-input v-model="text" class="col" label="Caption" dense />
+      </div>
 
-    <div class="row justify-center q-ma-md">
-      <q-input v-model="text" class="col" label="Location" dense>
-        <template v-slot:append>
-          <q-btn round dense flat icon="eva-navigation-2-outline" />
-        </template>
-      </q-input>
-    </div>
+      <div class="row justify-center q-ma-md">
+        <q-input v-model="text" class="col" label="Location" dense>
+          <template v-slot:append>
+            <q-btn round dense flat icon="eva-navigation-2-outline" />
+          </template>
+        </q-input>
+      </div>
 
-    <div class="row justify-center q-ma-md"></div>
+      <div class="row justify-center q-ma-lg">
+        <q-btn unelevated rounded color="primary" label="Post Image" />
+      </div>
+    </div>
   </q-page>
 </template>
 
