@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center q-pa-md">
     <div class="camera-frame q-pa-md">
       <img
         class="full-width"
@@ -10,12 +10,12 @@
         <q-btn color="grey-10" icon="eva-camera" round size="lg" />
       </div>
 
-      <div class="row justify-center q-ma-md">
-        <q-input v-model="text" class="col" label="Caption" dense />
+      <div class="row justify-center q-sm-6">
+        <q-input v-model="post.caption" class="col" label="Caption" dense />
       </div>
 
-      <div class="row justify-center q-ma-md">
-        <q-input v-model="text" class="col" label="Location" dense>
+      <div class="row justify-center q-sm-6">
+        <q-input v-model="post.location" class="col" label="Location" dense>
           <template v-slot:append>
             <q-btn round dense flat icon="eva-navigation-2-outline" />
           </template>
@@ -30,8 +30,21 @@
 </template>
 
 <script>
+import { uid } from "quasar";
+
 export default {
   name: "PageCamera",
+  data() {
+    return {
+      post: {
+        id: uid(),
+        caption: "",
+        location: "",
+        photo: null,
+        date: Date.now()
+      },
+    };
+  },
 };
 </script>
 
