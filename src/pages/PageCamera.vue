@@ -91,7 +91,7 @@ export default {
       imageCaptured: false,
       hasCameraSupport: true,
       imageUpload: [],
-      locationLoading: true,
+      locationLoading: false,
     };
   },
   computed: {
