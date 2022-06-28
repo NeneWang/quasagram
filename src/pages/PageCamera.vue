@@ -19,11 +19,18 @@
       <div class="text-center q-pa-md v">
         <q-btn
           @click="captureImage"
+          v-if="hasCameraSupport"
           color="grey-10"
           icon="eva-camera"
           round
           size="lg"
         />
+
+        <q-file v-else v-model="imageUpload" outlined label="Choose an Image">
+          <template v-slot:prepend>
+            <q-icon name="eva-attach-outline" />
+          </template>
+        </q-file>
       </div>
 
       <div class="row justify-center q-sm-6">
@@ -62,6 +69,8 @@ export default {
         date: Date.now(),
       },
       imageCaptured: false,
+      hasCameraSupport: true,
+      imageUpload: [],
     };
   },
   methods: {
@@ -72,6 +81,9 @@ export default {
         })
         .then((stream) => {
           this.$refs.video.srcObject = stream;
+        })
+        .catch((error) => {
+          this.hasCameraSupport = false;
         });
     },
     captureImage() {
