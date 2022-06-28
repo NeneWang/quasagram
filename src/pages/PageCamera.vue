@@ -11,7 +11,13 @@
         alt=""
       /> -->
       <div class="text-center q-pa-md v">
-        <q-btn color="grey-10" icon="eva-camera" round size="lg" />
+        <q-btn
+          @click="captureImage"
+          color="grey-10"
+          icon="eva-camera"
+          round
+          size="lg"
+        />
       </div>
 
       <div class="row justify-center q-sm-6">
@@ -60,6 +66,16 @@ export default {
         .then((stream) => {
           this.$refs.video.srcObject = stream;
         });
+    },
+    captureImage() {
+      let video = this.$refs.video;
+      let canvas = this.$refs.canvas;
+
+      canvas.width = video.getBoundingClientRect().width;
+      canvas.heigth = video.getBoundingClientRect().heigth;
+
+      let context = canvas.getContext("2d");
+      context.drawImage(video, 0, 0, canvas.width, canvas.width);
     },
   },
   mounted() {
