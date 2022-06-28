@@ -46,7 +46,13 @@
       <div class="row justify-center q-sm-6">
         <q-input v-model="post.location" class="col" label="Location" dense>
           <template v-slot:append>
-            <q-btn round dense flat icon="eva-navigation-2-outline" />
+            <q-btn
+              @click="getLocation"
+              round
+              dense
+              flat
+              icon="eva-navigation-2-outline"
+            />
           </template>
         </q-input>
       </div>
@@ -103,7 +109,7 @@ export default {
       context.drawImage(video, 0, 0, canvas.width, canvas.width);
       this.imageCaptured = true;
       this.post.photo = this.dataURItoBlob(canvas.toDataURL());
-      this.disableCamera()
+      this.disableCamera();
     },
     captureImageFallback(file) {
       console.log("file", file);
@@ -124,10 +130,10 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    disableCamera(){
-        this.$refs.video.srcObject.getVideoTracks().forEach(track => {
-            track.stop()
-        });
+    disableCamera() {
+      this.$refs.video.srcObject.getVideoTracks().forEach((track) => {
+        track.stop();
+      });
     },
     dataURItoBlob(dataURI) {
       // convert base64 to raw binary data held in a string
@@ -152,15 +158,45 @@ export default {
       var blob = new Blob([ab], { type: mimeString });
       return blob;
     },
+    getLocation() {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(`position: `, position);
+          this.getCityAndCountry(position);
+        },
+        (err) => {
+          console.log("err: ", err);
+        },
+        { timeout: 7000 }
+      );
+    },
+    getCityAndCountry(position) {
+      let apiUrl = `https://geocode.xyz/${position.coords.latitude},${position.coords.longitude}?json=1`;
+      this.$axios
+        .get(apiUrl)
+        .then((result) => {
+          console.log("result: ", result);
+          this.locationSuccess(result)
+        })
+        .catch((err) => {
+          console.log("err:", err);
+        });
+    },
+    locationSuccess(result) {
+      this.post.location = result.data.city;
+      if (result.data.country) {
+        this.post.location += `, ${result.data.country}`;
+      }
+    },
   },
   mounted() {
     this.initCamera();
   },
-  beforeDestroy(){
-    if(this.hasCameraSupport){
-        this.disableCamera()
+  beforeDestroy() {
+    if (this.hasCameraSupport) {
+      this.disableCamera();
     }
-  }
+  },
 };
 </script>
 
