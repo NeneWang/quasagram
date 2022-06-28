@@ -19,8 +19,9 @@
       <div class="text-center q-pa-md v">
         <q-btn
           @click="captureImage"
-          v-if="hasCameraSupport"
+          v-if="hasCameraSupport && locationSupported"
           color="grey-10"
+          dense
           icon="eva-camera"
           round
           size="lg"
@@ -44,11 +45,18 @@
       </div>
 
       <div class="row justify-center q-sm-6">
-        <q-input v-model="post.location" class="col" label="Location" dense>
+        <q-input
+          v-model="post.location"
+          class="col"
+          label="Location"
+          :loading="locationLoading"
+          dense
+        >
           <template v-slot:append>
             <q-btn
               @click="getLocation"
               round
+              v-if="!locationLoading"
               dense
               flat
               icon="eva-navigation-2-outline"
@@ -83,7 +91,14 @@ export default {
       imageCaptured: false,
       hasCameraSupport: true,
       imageUpload: [],
+      locationLoading: true,
     };
+  },
+  computed: {
+    locationSupported(){
+        if ('geolocation' in navigator) return true
+        return false
+    }
   },
   methods: {
     initCamera() {
@@ -190,11 +205,10 @@ export default {
       }
     },
     locationError() {
-      this.$q
-        .dialog({
-          title: "Error",
-          message: "Could not find your location",
-        })
+      this.$q.dialog({
+        title: "Error",
+        message: "Could not find your location",
+      });
     },
   },
   mounted() {
