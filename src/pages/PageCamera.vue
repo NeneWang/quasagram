@@ -1,12 +1,10 @@
 <template>
   <q-page class="flex flex-center q-pa-md">
     <div class="camera-frame q-pa-md">
-      <video 
-        class="full-width"
-        autoplay
-        ref="video"
-       />
-      
+      <video class="full-width" autoplay ref="video" />
+
+      <canvas ref="canvas" class="full-width" height="240"> </canvas>
+
       <!-- <img
         class="full-width"
         src="https://data.whicdn.com/images/342829695/original.jpg"
@@ -38,6 +36,8 @@
 <script>
 import { uid } from "quasar";
 
+require("md-gum-polyfill");
+
 export default {
   name: "PageCamera",
   data() {
@@ -47,22 +47,24 @@ export default {
         caption: "",
         location: "",
         photo: null,
-        date: Date.now()
+        date: Date.now(),
       },
     };
   },
   methods: {
-    initCamera(){
-        navigator.mediaDevices.getUserMedia({
-            video: true
-        }).then(stream => {
-            this.$refs.video.srcObject = stream
+    initCamera() {
+      navigator.mediaDevices
+        .getUserMedia({
+          video: true,
         })
-    }
+        .then((stream) => {
+          this.$refs.video.srcObject = stream;
+        });
+    },
   },
-  mounted(){
-    this.initCamera()
-  }
+  mounted() {
+    this.initCamera();
+  },
 };
 </script>
 
