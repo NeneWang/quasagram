@@ -176,10 +176,11 @@ export default {
         .get(apiUrl)
         .then((result) => {
           console.log("result: ", result);
-          this.locationSuccess(result)
+          this.locationSuccess(result);
         })
         .catch((err) => {
-          console.log("err:", err);
+          //   console.log("err:", err);
+          this.locationError();
         });
     },
     locationSuccess(result) {
@@ -187,6 +188,13 @@ export default {
       if (result.data.country) {
         this.post.location += `, ${result.data.country}`;
       }
+    },
+    locationError() {
+      this.$q
+        .dialog({
+          title: "Error",
+          message: "Could not find your location",
+        })
     },
   },
   mounted() {
