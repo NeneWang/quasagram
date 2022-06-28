@@ -26,7 +26,13 @@
           size="lg"
         />
 
-        <q-file v-else v-model="imageUpload" outlined label="Choose an Image">
+        <q-file
+          v-else
+          v-model="imageUpload"
+          @input="captureImageFallback"
+          outlined
+          label="Choose an Image"
+        >
           <template v-slot:prepend>
             <q-icon name="eva-attach-outline" />
           </template>
@@ -98,7 +104,26 @@ export default {
       this.imageCaptured = true;
       this.post.photo = this.dataURItoBlob(canvas.toDataURL());
     },
-    dataURItoBlob() {
+    captureImageFallback(file) {
+      console.log("file", file);
+      this.post.photo = file;
+      let canvas = this.$refs.canvas;
+      let context = canvas.getContext("2d");
+      var reader = new FileReader();
+
+      reader.onload = (event) => {
+        var img = new Image();
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          context.drawImage(img, 0, 0);
+          this.imageCaptured = true;
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    dataURItoBlob(dataURI) {
       // convert base64 to raw binary data held in a string
       // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
       var byteString = atob(dataURI.split(",")[1]);
