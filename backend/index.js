@@ -5,7 +5,21 @@ const port = 4000
 
 app.get('/', (req, res) => res.send('I love node so hard!'))
 
-app.listen(port, () => console.log(`Example app listining at httl://localhost: ${port}`))
+app.get('/posts', (req, res) => {
+    let posts = [
+        {
+            caption: 'Golden Gate Bridge',
+            location: 'San Francisco'
+        },
+        {
+            caption: 'London Eye',
+            location: 'London'
+        }
+    ]
+    res.send(posts)
+})
+
+app.listen(process.env.PORT || 3000)
 
 
 
