@@ -66,14 +66,19 @@ export default {
   },
   methods: {
     getPosts() {
-      console.log("GetPosts")
-      this.$axios.get('http://localhost:4000/posts').then(response => {
-        console.log('response: ', response)
-        this.posts = response.data
-      }).catch(err => {
-        console.log('err: ', err)
-      })
-
+      setTimeout(() => {
+        this.$axios
+          .get("http://localhost:4000/posts")
+          .then((res) => {
+            this.posts = res.data;
+          })
+          .catch((err) => {
+            this.$q.dialog({
+              title: "Error",
+              message: "Could not find your location",
+            });
+          });
+      });
     },
   },
   filters: {
@@ -81,9 +86,9 @@ export default {
       return date.formatDate(value, "MMM d h:mm");
     },
   },
-  created(){
-    this.getPosts()
-  }
+  created() {
+    this.getPosts();
+  },
 };
 </script>
 
