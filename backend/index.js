@@ -9,10 +9,12 @@ const app = express()
 const serviceAccount = require('./serviceAccountKey.json');
 
 initializeApp({
-  credential: cert(serviceAccount)
+    credential: cert(serviceAccount)
 });
 
 const db = getFirestore();
+
+
 
 // Your web app's Firebase configuration
 // const firebaseConfig = {
@@ -33,16 +35,16 @@ app.get('/', (req, res) => res.send('I love node so hard!'))
 
 app.get('/posts', (req, res) => {
     let posts = []
+    db.collection('posts').get().then(snapshot => {
+
+        snapshot.forEach((doc) => {
+            console.log(doc.id, '=>', doc.data());
+            posts.push(doc.data())
+        });
+        res.send(posts)
+    })
+
 })
-
-
-
-// var serviceAccount = require("path/to/serviceAccountKey.json");
-
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount)
-// });
-
 
 
 
