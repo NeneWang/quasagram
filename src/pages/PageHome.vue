@@ -67,8 +67,9 @@ export default {
   methods: {
     getPosts() {
       console.log("GetPosts")
-      this.$axios.get('http://localhost:4000/posts').then(resopnse => {
-        console.log('response: ', resopnse)
+      this.$axios.get('http://localhost:4000/posts').then(response => {
+        console.log('response: ', response)
+        this.posts = response.data
       }).catch(err => {
         console.log('err: ', err)
       })
