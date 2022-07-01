@@ -61,43 +61,28 @@ export default {
   name: "PageHome",
   data() {
     return {
-      posts: [
-        {
-          id: 1,
-          caption: "Golden Gate Bridge",
-          date: 1656193420878,
-          location: "San Francisco, United States",
-          imageUrl: "https://cdn.quasar.dev/img/parallax2.jpg",
-        },
-        {
-          id: 2,
-          caption: "Aint a Gate Bridge",
-          date: 1656193420878,
-          location: "San Francisco, United States",
-          imageUrl: "https://cdn.quasar.dev/img/parallax2.jpg",
-        },
-        {
-          id: 3,
-          caption: "Golden Gate Bridge",
-          date: 1656193420878,
-          location: "San Francisco, United States",
-          imageUrl: "https://cdn.quasar.dev/img/parallax2.jpg",
-        },
-        {
-          id: 4,
-          caption: "Golden Gate Bridge",
-          date: 1656193420878,
-          location: "San Francisco, United States",
-          imageUrl: "https://cdn.quasar.dev/img/parallax2.jpg",
-        },
-      ],
+      posts: [],
     };
+  },
+  methods: {
+    getPosts() {
+      console.log("GetPosts")
+      this.$axios.get('http://localhost:4000/posts').then(resopnse => {
+        console.log('response: ', resopnse)
+      }).catch(err => {
+        console.log('err: ', err)
+      })
+
+    },
   },
   filters: {
     niceDate(value) {
       return date.formatDate(value, "MMM d h:mm");
     },
   },
+  created(){
+    this.getPosts()
+  }
 };
 </script>
 
