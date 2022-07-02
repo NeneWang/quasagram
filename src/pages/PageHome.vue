@@ -102,13 +102,13 @@ export default {
         .get("http://localhost:4000/posts")
         .then((res) => {
           this.posts = res.data;
-          this.posts = []
+          // this.posts = []
           this.loadingPosts = false;
         })
         .catch((err) => {
           this.$q.dialog({
             title: "Error",
-            message: "Could not find your location",
+            message: "Could not download posts",
           });
         });
     },
