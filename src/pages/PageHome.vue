@@ -36,7 +36,7 @@
           </q-card>
         </template>
         <template v-else-if="!loadingPosts && !posts.length">
-          <h5 class="text-center text-grey">h5 Text</h5>
+          <h5 class="text-center text-grey">No posts yet</h5>
         </template>
         <template v-else>
           <q-card flat bordered>
@@ -102,6 +102,7 @@ export default {
         .get("http://localhost:4000/posts")
         .then((res) => {
           this.posts = res.data;
+          this.posts = []
           this.loadingPosts = false;
         })
         .catch((err) => {
