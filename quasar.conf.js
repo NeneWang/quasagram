@@ -50,7 +50,7 @@ module.exports = function (/* ctx */) {
     build: {
 
       env: {
-        API: API_PRODUCTION // Api Local | API Production
+        API: API_LOCAL // Api Local | API Production
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
