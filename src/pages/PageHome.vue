@@ -95,20 +95,18 @@ export default {
   methods: {
     getPosts() {
       this.loadingPosts = true;
-      setTimeout(() => {
-        this.$axios
-          .get("http://localhost:4000/posts")
-          .then((res) => {
-            this.posts = res.data;
-            this.loadingPosts = false;
-          })
-          .catch((err) => {
-            this.$q.dialog({
-              title: "Error",
-              message: "Could not find your location",
-            });
+      this.$axios
+        .get("http://localhost:4000/posts")
+        .then((res) => {
+          this.posts = res.data;
+          this.loadingPosts = false;
+        })
+        .catch((err) => {
+          this.$q.dialog({
+            title: "Error",
+            message: "Could not find your location",
           });
-      }, 1000);
+        });
     },
   },
   filters: {
