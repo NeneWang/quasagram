@@ -31,6 +31,14 @@ app.get('/posts', (req, res) => {
 
 })
 
+// Expoint - createPost
+
+app.get('/posts', (request, response) => {
+    response.set('Access-Control-Allow-Origin', '*')
+    
+
+
+})
 
 
 app.listen(process.env.PORT || port)
