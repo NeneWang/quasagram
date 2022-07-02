@@ -9,7 +9,7 @@
 // https://v1.quasar.dev/quasar-cli/quasar-conf-js
 
 let API_LOCAL = 'http://localhost:4000',
-  API_PRODUCTION = 'https://quasagram-backend.herokuapp.com'
+  API_PRODUCTION = 'https://quasagram-backend-nelson.herokuapp.com'
 
 module.exports = function (/* ctx */) {
   return {
@@ -50,7 +50,7 @@ module.exports = function (/* ctx */) {
     build: {
 
       env: {
-        API: API_LOCAL // Api Local | API Production
+        API: API_PRODUCTION // Api Local | API Production
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
