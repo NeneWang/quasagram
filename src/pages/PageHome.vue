@@ -2,7 +2,7 @@
   <q-page class="constrain q-pa-md">
     <div class="row q-col-gutter-lg">
       <div class="col-sm-8 col-12">
-        <template v-if="!loadingPosts">
+        <template v-if="!loadingPosts && posts.length">
           <q-card
             class="card-post q-mb-md"
             v-for="post in posts"
@@ -34,6 +34,9 @@
               <div class="text-GREY">{{ post.date | niceDate }}</div>
             </q-card-section>
           </q-card>
+        </template>
+        <template v-else-if="!loadingPosts && !posts.length">
+          <h5 class="text-center text-grey">h5 Text</h5>
         </template>
         <template v-else>
           <q-card flat bordered>
