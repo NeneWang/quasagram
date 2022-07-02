@@ -2,7 +2,7 @@
   <q-page class="constrain q-pa-md">
     <div class="row q-col-gutter-lg">
       <div class="col-sm-8 col-12">
-        <template v-if="loadingPosts" >
+        <template v-if="!loadingPosts">
           <q-card
             class="card-post q-mb-md"
             v-for="post in posts"
@@ -35,11 +35,31 @@
             </q-card-section>
           </q-card>
         </template>
-        <template v-else >
-          Loading...
+        <template v-else>
+          <q-card flat bordered>
+            <q-item>
+              <q-item-section avatar>
+                <q-skeleton type="QAvatar" />
+              </q-item-section>
 
+              <q-item-section>
+                <q-item-label>
+                  <q-skeleton type="text" />
+                </q-item-label>
+                <q-item-label caption>
+                  <q-skeleton type="text" />
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-skeleton height="200px" square />
+
+            <q-card-actions align="right" class="q-gutter-md">
+              <q-skeleton type="QBtn" />
+              <q-skeleton type="QBtn" />
+            </q-card-actions>
+          </q-card>
         </template>
-
       </div>
       <div class="col-4 large-screen-only">
         <q-item class="fixed">
@@ -74,12 +94,13 @@ export default {
   },
   methods: {
     getPosts() {
+      this.loadingPosts = true;
       setTimeout(() => {
         this.$axios
           .get("http://localhost:4000/posts")
           .then((res) => {
             this.posts = res.data;
-            this.loadingPosts = true
+            this.loadingPosts = false;
           })
           .catch((err) => {
             this.$q.dialog({
