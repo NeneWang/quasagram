@@ -7,7 +7,7 @@
         v-show="imageCaptured"
         ref="canvas"
         class="full-width"
-        height="240"
+        height="500"
       >
       </canvas>
 
@@ -66,7 +66,7 @@
       </div>
 
       <div class="row justify-center q-ma-lg">
-        <q-btn unelevated rounded color="primary" label="Post Image" />
+        <q-btn unelevated rounded @click="addPost()" color="primary" label="Post Image" />
       </div>
     </div>
   </q-page>
@@ -210,6 +210,9 @@ export default {
         message: "Could not find your location",
       });
     },
+    addPost(){
+      console.log('Addin a new post')
+    }
   },
   mounted() {
     this.initCamera();
@@ -225,5 +228,4 @@ export default {
 <style lang="sass">
 .camera-frame
     border: 2px solid $grey-10
-    border-radius: 10px
 </style>
