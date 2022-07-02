@@ -99,7 +99,7 @@ export default {
     getPosts() {
       this.loadingPosts = true;
       this.$axios
-        .get("http://localhost:4000/posts")
+        .get(`${process.env.API}/posts`)
         .then((res) => {
           this.posts = res.data;
           // this.posts = []
