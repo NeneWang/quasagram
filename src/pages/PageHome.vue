@@ -2,7 +2,7 @@
   <q-page class="constrain q-pa-md">
     <div class="row q-col-gutter-lg">
       <div class="col-sm-8 col-12">
-        <template v-if="!loadingPosts" >
+        <template v-if="loadingPosts" >
           <q-card
             class="card-post q-mb-md"
             v-for="post in posts"
@@ -35,6 +35,11 @@
             </q-card-section>
           </q-card>
         </template>
+        <template v-else >
+          Loading...
+
+        </template>
+
       </div>
       <div class="col-4 large-screen-only">
         <q-item class="fixed">
@@ -74,6 +79,7 @@ export default {
           .get("http://localhost:4000/posts")
           .then((res) => {
             this.posts = res.data;
+            this.loadingPosts = true
           })
           .catch((err) => {
             this.$q.dialog({
@@ -81,7 +87,7 @@ export default {
               message: "Could not find your location",
             });
           });
-      });
+      }, 1000);
     },
   },
   filters: {
