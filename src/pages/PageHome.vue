@@ -2,37 +2,39 @@
   <q-page class="constrain q-pa-md">
     <div class="row q-col-gutter-lg">
       <div class="col-sm-8 col-12">
-        <q-card
-          class="card-post q-mb-md"
-          v-for="post in posts"
-          :key="post.id"
-          flat
-          bordered
-        >
-          <q-item>
-            <q-item-section avatar>
-              <q-avatar>
-                <img
-                  src="https://en.gravatar.com/userimage/154408686/cc0f6634352ebaba1c30d7bd2101dbcf.jpg?size=200"
-                />
-              </q-avatar>
-            </q-item-section>
+        <template v-if="!loadingPosts" >
+          <q-card
+            class="card-post q-mb-md"
+            v-for="post in posts"
+            :key="post.id"
+            flat
+            bordered
+          >
+            <q-item>
+              <q-item-section avatar>
+                <q-avatar>
+                  <img
+                    src="https://en.gravatar.com/userimage/154408686/cc0f6634352ebaba1c30d7bd2101dbcf.jpg?size=200"
+                  />
+                </q-avatar>
+              </q-item-section>
 
-            <q-item-section>
-              <q-item-label class="text-bold">Nelson__Wang</q-item-label>
-              <q-item-label caption> {{ post.location }} </q-item-label>
-            </q-item-section>
-          </q-item>
+              <q-item-section>
+                <q-item-label class="text-bold">Nelson__Wang</q-item-label>
+                <q-item-label caption> {{ post.location }} </q-item-label>
+              </q-item-section>
+            </q-item>
 
-          <q-separator />
+            <q-separator />
 
-          <q-img :src="post.imageUrl" />
+            <q-img :src="post.imageUrl" />
 
-          <q-card-section>
-            <div class="text-h6">{{ post.caption }}</div>
-            <div class="text-GREY">{{ post.date | niceDate }}</div>
-          </q-card-section>
-        </q-card>
+            <q-card-section>
+              <div class="text-h6">{{ post.caption }}</div>
+              <div class="text-GREY">{{ post.date | niceDate }}</div>
+            </q-card-section>
+          </q-card>
+        </template>
       </div>
       <div class="col-4 large-screen-only">
         <q-item class="fixed">
@@ -62,7 +64,7 @@ export default {
   data() {
     return {
       posts: [],
-      loadingPosts: false
+      loadingPosts: false,
     };
   },
   methods: {
