@@ -33,9 +33,16 @@ app.get('/posts', (req, res) => {
 
 // Expoint - createPost
 
-app.get('/posts', (request, response) => {
+app.get('/createPost', (request, response) => {
     response.set('Access-Control-Allow-Origin', '*')
-    
+
+    let posts = []
+    db.collection('posts').orderBy('date', 'desc').get().then(snapshot => {
+        snapshot.forEach( (doc) => {
+            posts.push(doc.data())
+        })
+        response.send(posts)
+    })
 
 
 })
