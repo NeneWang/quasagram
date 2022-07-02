@@ -66,7 +66,13 @@
       </div>
 
       <div class="row justify-center q-ma-lg">
-        <q-btn unelevated rounded @click="addPost()" color="primary" label="Post Image" />
+        <q-btn
+          unelevated
+          rounded
+          @click="addPost()"
+          color="primary"
+          label="Post Image"
+        />
       </div>
     </div>
   </q-page>
@@ -95,10 +101,10 @@ export default {
     };
   },
   computed: {
-    locationSupported(){
-        if ('geolocation' in navigator) return true
-        return false
-    }
+    locationSupported() {
+      if ("geolocation" in navigator) return true;
+      return false;
+    },
   },
   methods: {
     initCamera() {
@@ -210,9 +216,24 @@ export default {
         message: "Could not find your location",
       });
     },
-    addPost(){
-      console.log('Addin a new post')
-    }
+    addPost() {
+      // console.log('Addin a new post')
+      let formData = new FormData();
+      formData.append("id", this.post.id);
+      formData.append("caption", this.post.caption);
+      formData.append("location", this.post.location);
+      formData.append("date", this.post.date);
+      formData.append("file", this.post.photo, this.post.id + ".png");
+
+      this.$axios
+        .post(`${process.env.API}/createPost`, formData)
+        .then((response) => {
+          console.log("response: ", response);
+        })
+        .catch((err) => {
+          console.log("err: ", err);
+        });
+    },
   },
   mounted() {
     this.initCamera();
