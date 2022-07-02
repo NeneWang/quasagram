@@ -2,6 +2,9 @@ const express = require('express')
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
+const http = require('http');
+const busboy = require('busboy');
+
 const port = 4000
 const app = express()
 
@@ -33,9 +36,44 @@ app.get('/posts', (req, res) => {
 
 // Expoint - createPost
 
-app.post('/createPost', (request, response) => {
-    response.set('Access-Control-Allow-Origin', '*')
-    response.send(request.headers)
+app.post('/createPost', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*')
+
+    
+
+    console.log('POST request');
+    const bb = busboy({ headers: req.headers });
+
+    bb.on('file', (name, file, info) => {
+
+
+        const { filename, encoding, mimeType } = info;
+        console.log(
+            `File [${name}]: filename: %j, encoding: %j, mimeType: %j`,
+            filename,
+            encoding,
+            mimeType
+        );
+        file.on('data', (data) => {
+            console.log(`File [${name}] got ${data.length} bytes`);
+        }).on('close', () => {
+            console.log(`File [${name}] done`);
+        });
+    });
+
+    bb.on('field', (name, val, info) => {
+        console.log(`Field [${name}]: value: %j`, val);
+    });
+
+    bb.on('close', () => {
+        console.log('Done parsing form!');
+        // res.writeHead(303, { Connection: 'close', Location: '/' });
+        res.send("Done Parsing form!");
+    });
+    
+    req.pipe(bb);
+
+
 })
 
 
