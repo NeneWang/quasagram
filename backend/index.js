@@ -39,10 +39,12 @@ app.get('/posts', (req, res) => {
 app.post('/createPost', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*')
 
-    
+
 
     console.log('POST request');
     const bb = busboy({ headers: req.headers });
+
+    let fields = {}
 
     bb.on('file', (name, file, info) => {
 
@@ -63,17 +65,26 @@ app.post('/createPost', (req, res) => {
 
     bb.on('field', (name, val, info) => {
         console.log(`Field [${name}]: value: %j`, val);
+        fields[name] = val
     });
 
     bb.on('close', () => {
         console.log('Done parsing form!');
         // res.writeHead(303, { Connection: 'close', Location: '/' });
+        console.log('fields: ', fields)
+        db.collection('posts').doc(fields.id).set(
+            {
+                id: fields.id,
+                caption: fields.caption,
+                location: fields.location,
+                date: fields.date
+            }
+        )
+
         res.send("Done Parsing form!");
     });
-    
+
     req.pipe(bb);
-
-
 })
 
 
