@@ -238,13 +238,19 @@ export default {
             message: "Post Created.",
             actions: [
               {
-                label: 'Dismiss', color: 'white' //By default it dismissess the button
-              }
-            ]
+                label: "Dismiss",
+                color: "white", //By default it dismissess the button
+              },
+            ],
           });
         })
         .catch((err) => {
           console.log("err: ", err);
+
+          this.$q.dialog({
+            title: "Error",
+            message: "Sorry, couldn't create the post!",
+          });
         });
     },
   },
