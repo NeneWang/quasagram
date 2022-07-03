@@ -20,6 +20,7 @@
         <q-btn
           @click="captureImage"
           v-if="hasCameraSupport && locationSupported"
+          :disable="imageCaptured"
           color="grey-10"
           dense
           icon="eva-camera"
@@ -67,6 +68,7 @@
 
       <div class="row justify-center q-ma-lg">
         <q-btn
+          :disable="!post.caption || !post.photo"
           unelevated
           rounded
           @click="addPost()"
