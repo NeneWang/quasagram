@@ -1,6 +1,11 @@
 const express = require('express')
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+const { getStorage } = require('firebase-admin/storage');
+
+let path = require('path')
+let os = require('os')
+let fs = require('fs')
 
 const http = require('http');
 const busboy = require('busboy');
@@ -12,10 +17,13 @@ const app = express()
 const serviceAccount = require('./serviceAccountKey.json');
 
 initializeApp({
-    credential: cert(serviceAccount)
+    credential: cert(serviceAccount),
+    storageBucket: 'quasagram-57a30.appspot.com'
 });
 
+
 const db = getFirestore();
+const bucket = getStorage().bucket();
 
 app.get('/', (req, res) => res.send('I love node so hard!'))
 
@@ -71,13 +79,14 @@ app.post('/createPost', (req, res) => {
     bb.on('close', () => {
         console.log('Done parsing form!');
         // res.writeHead(303, { Connection: 'close', Location: '/' });
-        console.log('fields: ', fields)
+        // console.log('fields: ', fields)
         db.collection('posts').doc(fields.id).set(
             {
                 id: fields.id,
                 caption: fields.caption,
                 location: fields.location,
-                date: fields.date
+                date: parseInt(fields.date),
+                imageUrl: 'https://firebasestorage.googleapis.com/v0/b/quasagram-57a30.appspot.com/o/img1.PNG?alt=media&token=558e3f4e-abac-4850-88dc-ff3acc26e768'
             }
         )
 
