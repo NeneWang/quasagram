@@ -220,6 +220,8 @@ export default {
     },
     addPost() {
       // console.log('Addin a new post')
+      this.$q.loading.show()
+
       let formData = new FormData();
       formData.append("id", this.post.id);
       formData.append("caption", this.post.caption);
@@ -243,6 +245,9 @@ export default {
               },
             ],
           });
+
+          this.$q.loading.hide()
+
         })
         .catch((err) => {
           console.log("err: ", err);
@@ -251,6 +256,7 @@ export default {
             title: "Error",
             message: "Sorry, couldn't create the post!",
           });
+          this.$q.loading.hide()
         });
     },
   },
