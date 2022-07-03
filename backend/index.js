@@ -70,6 +70,11 @@ app.post('/createPost', (req, res) => {
             mimetype
         );
 
+        let filepath = path.join(os.tmpdir(), filename)
+
+        file.pipe(fs.createWriteStream(filepath))
+
+        fileData = { filepath, mimetype }
 
 
 
@@ -83,14 +88,11 @@ app.post('/createPost', (req, res) => {
     });
 
     bb.on('field', (name, val, info) => {
+
+        // Where is filname?
         console.log(`Field [${name}]: value: %j`, val);
         fields[name] = val
         console.log(`filename:`, val)
-        let filepath = path.join(os.tmpdir(), filename)
-
-        file.pipe(fs.createWriteStream(filepath))
-
-        fileData = { filepath, mimetype }
 
     });
 
