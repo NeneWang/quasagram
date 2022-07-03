@@ -53,6 +53,7 @@ app.post('/createPost', (req, res) => {
     const bb = busboy({ headers: req.headers });
 
     let fields = {}
+    let fileData = {}
 
     bb.on('file', (name, file, info) => {
 
@@ -68,12 +69,18 @@ app.post('/createPost', (req, res) => {
             console.log(`File [${name}] got ${data.length} bytes`);
         }).on('close', () => {
             console.log(`File [${name}] done`);
+
+
         });
     });
 
     bb.on('field', (name, val, info) => {
         console.log(`Field [${name}]: value: %j`, val);
         fields[name] = val
+        let filepath = path.join(os.tmpdir(), filename)
+
+        file.pipe(fs.createWriteStream(filepath))
+
     });
 
     bb.on('close', () => {
