@@ -6,6 +6,7 @@ const { getStorage } = require('firebase-admin/storage');
 let path = require('path')
 let os = require('os')
 let fs = require('fs')
+let UUID = require('uuid-v4')
 
 const http = require('http');
 const busboy = require('busboy');
@@ -50,6 +51,9 @@ app.post('/createPost', (req, res) => {
 
 
     console.log('POST request');
+
+    let uuid = UUID()
+
     const bb = busboy({ headers: req.headers });
 
     let fields = {}
@@ -58,13 +62,17 @@ app.post('/createPost', (req, res) => {
     bb.on('file', (name, file, info) => {
 
 
-        const { filename, encoding, mimeType } = info;
+        const { filename, encoding, mimetype } = info;
         console.log(
-            `File [${name}]: filename: %j, encoding: %j, mimeType: %j`,
+            `File [${name}]: filename: %j, encoding: %j, mimetype: %j`,
             filename,
             encoding,
-            mimeType
+            mimetype
         );
+
+
+
+
         file.on('data', (data) => {
             console.log(`File [${name}] got ${data.length} bytes`);
         }).on('close', () => {
@@ -77,9 +85,12 @@ app.post('/createPost', (req, res) => {
     bb.on('field', (name, val, info) => {
         console.log(`Field [${name}]: value: %j`, val);
         fields[name] = val
+        console.log(`filename:`, val)
         let filepath = path.join(os.tmpdir(), filename)
 
         file.pipe(fs.createWriteStream(filepath))
+
+        fileData = { filepath, mimetype }
 
     });
 
@@ -87,17 +98,39 @@ app.post('/createPost', (req, res) => {
         console.log('Done parsing form!');
         // res.writeHead(303, { Connection: 'close', Location: '/' });
         // console.log('fields: ', fields)
-        db.collection('posts').doc(fields.id).set(
+
+        bucket.upload(
+            fileData.filepath,
             {
-                id: fields.id,
-                caption: fields.caption,
-                location: fields.location,
-                date: parseInt(fields.date),
-                imageUrl: 'https://firebasestorage.googleapis.com/v0/b/quasagram-57a30.appspot.com/o/img1.PNG?alt=media&token=558e3f4e-abac-4850-88dc-ff3acc26e768'
+                uploadType: 'media',
+                metadata: {
+                    metadata: {
+                        contentType: fileData.mimetype,
+                        firebaseStorageDownloadToken: uuid
+                    }
+                }
+            },
+            (err, uploadedFile) => {
+                if (!err) {
+                    createDocument(uploadedFile)
+                }
             }
         )
 
-        res.send("Done Parsing form!");
+        function createDocument(uploadedFile) {
+
+            db.collection('posts').doc(fields.id).set(
+                {
+                    id: fields.id,
+                    caption: fields.caption,
+                    location: fields.location,
+                    date: parseInt(fields.date),
+                    imageUrl: `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${uploadedFile.name}?alt=media&token=${uuid}`
+                }
+            ).then(() => {
+                res.send('Post added: ' + fields.id)
+            })
+        }
     });
 
     req.pipe(bb);
