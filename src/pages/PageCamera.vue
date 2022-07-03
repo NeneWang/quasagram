@@ -231,6 +231,17 @@ export default {
         .post(`${process.env.API}/createPost`, formData)
         .then((response) => {
           console.log("response: ", response);
+          this.$router.push("/");
+          // We can add the dialog here.
+
+          this.$q.notify({
+            message: "Post Created.",
+            actions: [
+              {
+                label: 'Dismiss', color: 'white' //By default it dismissess the button
+              }
+            ]
+          });
         })
         .catch((err) => {
           console.log("err: ", err);

@@ -108,7 +108,7 @@ app.post('/createPost', (req, res) => {
                 metadata: {
                     metadata: {
                         contentType: fileData.mimetype,
-                        firebaseStorageDownloadToken: uuid
+                        firebaseStorageDownloadTokens: uuid
                     }
                 }
             },
@@ -134,6 +134,11 @@ app.post('/createPost', (req, res) => {
             })
         }
     });
+
+// Posted Image: https://firebasestorage.googleapis.com/v0/b/quasagram-57a30.appspot.com/o/d775a602-3852-4956-ae5e-5f758e24acc7.png?alt=media&token=8ae45884-2437-499a-b317-6d81eeee4bc5
+// Posted Image: https://firebasestorage.googleapis.com/v0/b/quasagram-57a30.appspot.com/o/d775a602-3852-4956-ae5e-5f758e24acc7.png?alt=media&token=26294aac-0f34-4e69-add0-227953539a6f
+
+// I see so the token is worng here.
 
     req.pipe(bb);
 })
