@@ -9,31 +9,34 @@ const app = express()
 
 // Config - Firebase
 
-var serviceAccount = require("./quasagram-service-account.json");
+const serviceAccount = require("./quasagram-service-account.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
 
-let db = admin.firestore()
+const db = admin.firestore()
 
 // Endpoints
 
 app.get('/', (request, response) => {
+    response.set('Access-Control-Allow-Origin', '*')
+
     response.send('I love Node so hard!')
 })
 
 app.get('/tasks', (request, response) => {
+    response.set('Access-Control-Allow-Origin', '*')
 
     let tasks = []
 
     db.collection('tasks').orderBy('id', 'asc').get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
+        snapshot.docs.forEach((doc) => {
             tasks.push(doc.data())
         })
+        response.send(tasks)
     })
-    response.send(tasks)
 })
 
 // Listen
