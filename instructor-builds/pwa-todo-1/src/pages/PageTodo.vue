@@ -63,8 +63,14 @@ export default {
         id: Date.now(),
         title: this.newTask
       }
+      let formData = new FormData()
+      // formData.append('id', newTask.id)
+      // formData.append('title', newTask.title)
+      this.$axios.post(`${process.env.API}/createTask?id=${newTask.id}&title=${newTask.title}`)
+
       this.tasks.push(newTask)
       this.newTask = ''
+
     },
     getPosts(){
       this.$axios.get(`${process.env.API}/tasks`).then(response => {

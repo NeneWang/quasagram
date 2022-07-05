@@ -39,6 +39,20 @@ app.get('/tasks', (request, response) => {
     })
 })
 
+
+app.post('/createTask', (request, response) => {
+    response.set('Access-Control-Allow-Origin', '*')
+
+    db.collection('tasks').add({
+        id: parseInt(request.query.id),
+        title: request.query.title
+    }).then(() => {
+        response.send('Task Added from the query: ' + request.query )
+    })
+
+
+})
+
 // Listen
 
 app.listen(5001)
