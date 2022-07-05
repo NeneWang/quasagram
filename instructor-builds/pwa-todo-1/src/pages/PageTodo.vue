@@ -46,14 +46,14 @@ export default {
     return {
       newTask: '',
       tasks: [
-        {
-          id: 1593467150887,
-          title: 'Do this'
-        },
-        {
-          id: 1593467166614,
-          title: 'Do that'
-        }
+        // {
+        //   id: 1593467150887,
+        //   title: 'Do this'
+        // },
+        // {
+        //   id: 1593467166614,
+        //   title: 'Do that'
+        // }
       ]
     }
   },
@@ -65,7 +65,15 @@ export default {
       }
       this.tasks.push(newTask)
       this.newTask = ''
+    },
+    getPosts(){
+      this.$axios.get(`http://localhost:5001/tasks`).then(response => {
+        this.tasks = response.data
+      })
     }
+  },
+  created(){
+    this.getPosts()
   }
 }
 </script>
