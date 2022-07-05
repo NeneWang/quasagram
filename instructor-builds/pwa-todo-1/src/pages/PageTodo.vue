@@ -67,7 +67,7 @@ export default {
       this.newTask = ''
     },
     getPosts(){
-      this.$axios.get(`http://localhost:5001/tasks`).then(response => {
+      this.$axios.get(`${process.env.API}/tasks`).then(response => {
         this.tasks = response.data
       })
     }
