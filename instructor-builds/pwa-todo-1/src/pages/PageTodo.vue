@@ -40,6 +40,10 @@
 </template>
 
 <script>
+
+var qs = require('qs')
+
+
 export default {
   name: 'PageTodo',
   data() {
@@ -63,10 +67,12 @@ export default {
         id: Date.now(),
         title: this.newTask
       }
-      let formData = new FormData()
+
       // formData.append('id', newTask.id)
       // formData.append('title', newTask.title)
-      this.$axios.post(`${process.env.API}/createTask?id=${newTask.id}&title=${newTask.title}`)
+
+      let newTaskQS = qs.stringify(newTask)
+      this.$axios.post(`${process.env.API}/createTask?${newTaskQS}`)
 
       this.tasks.push(newTask)
       this.newTask = ''
