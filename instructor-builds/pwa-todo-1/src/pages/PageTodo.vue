@@ -10,45 +10,28 @@
       square
     >
       <template v-slot:append>
-        <q-btn
-          @click="addTask"
-          icon="add"
-          round
-          dense
-          flat
-        />
+        <q-btn @click="addTask" icon="add" round dense flat />
       </template>
     </q-input>
 
-    <q-list
-      bordered
-      separator
-    >
-      <q-item
-        v-for="task in tasks"
-        :key="task.id"
-        class="bg-cyan-1"
-      >
+    <q-list bordered separator>
+      <q-item v-for="task in tasks" :key="task.id" class="bg-cyan-1">
         <q-item-section>
           <q-item-label>{{ task.title }}</q-item-label>
         </q-item-section>
-
       </q-item>
-
-    </q-list>    
+    </q-list>
   </q-page>
 </template>
 
 <script>
-
-var qs = require('qs')
-
+var qs = require("qs");
 
 export default {
-  name: 'PageTodo',
+  name: "PageTodo",
   data() {
     return {
-      newTask: '',
+      newTask: "",
       tasks: [
         // {
         //   id: 1593467150887,
@@ -58,34 +41,36 @@ export default {
         //   id: 1593467166614,
         //   title: 'Do that'
         // }
-      ]
-    }
+      ],
+    };
   },
   methods: {
     addTask() {
       let newTask = {
         id: Date.now(),
-        title: this.newTask
-      }
+        title: this.newTask,
+      };
 
       // formData.append('id', newTask.id)
       // formData.append('title', newTask.title)
 
-      let newTaskQS = qs.stringify(newTask)
-      this.$axios.post(`${process.env.API}/createTask?${newTaskQS}`)
+      let newTaskQS = qs.stringify(newTask);
+      this.$axios.post(`${process.env.API}/createTask?${newTaskQS}`);
 
-      this.tasks.push(newTask)
-      this.newTask = ''
-
+      this.tasks.push(newTask);
+      this.newTask = "";
+      // this.$q.loading.hide()
     },
-    getPosts(){
-      this.$axios.get(`${process.env.API}/tasks`).then(response => {
-        this.tasks = response.data
-      })
-    }
+    getTasks() {
+      this.$q.loading.show();
+      this.$axios.get(`${process.env.API}/tasks`).then((response) => {
+        this.tasks = response.data;
+        this.$q.loading.hide();
+      });
+    },
   },
-  created(){
-    this.getPosts()
-  }
-}
+  created() {
+    this.getTasks();
+  },
+};
 </script>
