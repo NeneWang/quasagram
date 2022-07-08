@@ -49,8 +49,6 @@ app.post('/createTask', (request, response) => {
     }).then(() => {
         response.send('Task Added from the query: ' + request.query )
     })
-
-
 })
 
 // Listen
