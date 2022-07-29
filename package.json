@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "start": "quasar dev"
+    "start": "quasar dev",
+    "icons": "icongenie generate -i app-icon.png --skip-trim --theme-color 212121"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -15,7 +16,8 @@
     "core-js": "^3.6.5",
     "firebase-admin": "^11.0.0",
     "md-gum-polyfill": "^1.0.0",
-    "quasar": "^1.0.0"
+    "quasar": "^1.0.0",
+    "sharp": "^0.30.7"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
