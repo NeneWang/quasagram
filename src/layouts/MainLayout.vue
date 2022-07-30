@@ -1,9 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header
-      class="bg-white text-grey-10"
-      bordered
-    >
+    <q-header class="bg-white text-grey-10" bordered>
       <q-toolbar class="constrain">
         <q-btn
           to="/camera"
@@ -14,11 +11,7 @@
           round
           dense
         />
-        <q-separator
-          class="large-screen-only"
-          vertical
-          spaced
-        />
+        <q-separator class="large-screen-only" vertical spaced />
         <q-toolbar-title class="text-grand-hotel text-bold">
           Quasagram
         </q-toolbar-title>
@@ -34,27 +27,25 @@
       </q-toolbar>
     </q-header>
 
-    <q-footer
-      class="bg-white small-screen-only"
-      bordered
-    >
+    <q-footer class="bg-white small-screen-only" bordered>
+      <q-banner inline-actions class="bg-primary text-white">
+        Install Quasagram?
+        <q-btn flat label="Yes" />
+        <q-btn flat label="Later" />
+        <q-btn flat label="Never" />
+      </q-banner>
+
       <q-tabs
         class="text-grey-10"
         active-color="primary"
         indicator-color="transparent"
       >
-        <q-route-tab
-          to="/"
-          icon="eva-home-outline"
-        />
-        <q-route-tab
-          to="/camera"
-          icon="eva-camera-outline"
-        />
+        <q-route-tab to="/" icon="eva-home-outline" />
+        <q-route-tab to="/camera" icon="eva-camera-outline" />
       </q-tabs>
     </q-footer>
 
-    <q-page-container class="bg-grey-1" >
+    <q-page-container class="bg-grey-1">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -62,25 +53,23 @@
 
 <script>
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
 
-  data () {
-    return {
-      
-    }
-  }
-}
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="sass">
-  .q-toolbar
-    @media (min-width: $breakpoint-sm-min)
-      height: 77px
-  .q-toolbar__title
+.q-toolbar
+  @media (min-width: $breakpoint-sm-min)
+    height: 77px
+.q-toolbar__title
+  font-size: 30px
+  @media (max-width: $breakpoint-xs-max)
+    text-align: center
+.q-footer
+  .q-tab__icon
     font-size: 30px
-    @media (max-width: $breakpoint-xs-max)
-      text-align: center
-  .q-footer
-    .q-tab__icon
-      font-size: 30px
 </style>
