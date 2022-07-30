@@ -38,10 +38,13 @@
           />
         </template>
 
-        Install Quasagram?
-        <q-btn flat label="Yes" />
-        <q-btn flat label="Later" />
-        <q-btn flat label="Never" />
+        <b>Install Quasagram?</b>
+        
+        <template v-slot:action>
+          <q-btn flat class="q-px" label="Yes" />
+          <q-btn flat class="q-px" label="Later" />
+          <q-btn flat class="q-px" label="Never" />
+        </template>
       </q-banner>
 
       <q-tabs
