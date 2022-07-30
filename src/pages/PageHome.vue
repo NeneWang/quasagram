@@ -76,7 +76,7 @@
 
           <q-item-section>
             <q-item-label class="text-bold">Nelson__Wang</q-item-label>
-            <q-item-label caption> Nelson Wang </q-item-label>
+            <q-item-label caption> Nelson asdWang </q-item-label>
           </q-item-section>
         </q-item>
       </div>

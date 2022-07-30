@@ -13,7 +13,7 @@
         />
         <q-separator class="large-screen-only" vertical spaced />
         <q-toolbar-title class="text-grand-hotel text-bold">
-          Quasagram
+          Quasagrama
         </q-toolbar-title>
         <q-btn
           to="/"
@@ -28,7 +28,16 @@
     </q-header>
 
     <q-footer class="bg-white small-screen-only" bordered>
-      <q-banner inline-actions class="bg-primary text-white">
+      <q-banner inline-actions class="bg-primary text-white" dense>
+        <template v-slot:avatar>
+          <q-avatar
+            color="white"
+            icon="eva-camera-outline"
+            text-color="grey-10"
+            font-size="22px"
+          />
+        </template>
+
         Install Quasagram?
         <q-btn flat label="Yes" />
         <q-btn flat label="Later" />
