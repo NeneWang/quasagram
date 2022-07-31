@@ -4,7 +4,15 @@
  * quasar.conf > pwa > workboxPluginMode is set to "InjectManifest"
  */
 
+/*
+ dependencies
+*/
+
+import {precacheAndRoute} from 'workbox-precaching';
+
+precacheAndRoute(self.__WB_MANIFEST);
 
 
+console.log("Custom Service Worker")
 
 
