@@ -1,0 +1,120 @@
+[debug] [2022-07-31T18:41:43.973Z] ----------------------------------------------------------------------
+[debug] [2022-07-31T18:41:43.976Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-07-31T18:41:43.977Z] CLI Version:   11.4.0
+[debug] [2022-07-31T18:41:43.977Z] Platform:      win32
+[debug] [2022-07-31T18:41:43.978Z] Node Version:  v16.16.0
+[debug] [2022-07-31T18:41:43.979Z] Time:          Sun Jul 31 2022 14:41:43 GMT-0400 (Eastern Daylight Time)
+[debug] [2022-07-31T18:41:43.979Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-07-31T18:41:44.083Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-07-31T18:41:44.083Z] > authorizing via signed-in user (wangnelson2@gmail.com)
+[debug] [2022-07-31T18:41:44.084Z] [iam] checking project quasagram-57a30 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-07-31T18:41:44.086Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions [none]
+[debug] [2022-07-31T18:41:44.087Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions x-goog-quota-user=projects/quasagram-57a30
+[debug] [2022-07-31T18:41:44.087Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T18:41:44.322Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions 200
+[debug] [2022-07-31T18:41:44.322Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T18:41:44.323Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-07-31T18:41:44.323Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-07-31T18:41:44.470Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-07-31T18:41:44.470Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-07-31T18:41:44.471Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 [none]
+[debug] [2022-07-31T18:41:44.748Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 200
+[debug] [2022-07-31T18:41:44.749Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 {"projectId":"quasagram-57a30","projectNumber":"300964608650","displayName":"Quasagram","name":"projects/quasagram-57a30","resources":{"hostingSite":"quasagram-57a30","storageBucket":"quasagram-57a30.appspot.com","locationId":"us-east1"},"state":"ACTIVE","etag":"1_3c008763-420d-4e51-92b8-7fc998c8c44b"}
+[info] 
+[info] === Deploying to 'quasagram-57a30'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2022-07-31T18:41:44.800Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at validateString (node:internal/validators:120:11)
+    at Object.join (node:path:429:7)
+    at Config.path (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\config.js:123:45)
+    at getChildEnvironment (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:51:49)
+    at runTargetCommands (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:72:14)
+    at C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:121:24
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async chain (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\index.js:33:9)
+    at async deploy (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\index.js:67:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-07-31T18:42:20.354Z] ----------------------------------------------------------------------
+[debug] [2022-07-31T18:42:20.356Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy --debug
+[debug] [2022-07-31T18:42:20.356Z] CLI Version:   11.4.0
+[debug] [2022-07-31T18:42:20.356Z] Platform:      win32
+[debug] [2022-07-31T18:42:20.356Z] Node Version:  v16.16.0
+[debug] [2022-07-31T18:42:20.357Z] Time:          Sun Jul 31 2022 14:42:20 GMT-0400 (Eastern Daylight Time)
+[debug] [2022-07-31T18:42:20.357Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-07-31T18:42:20.414Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-07-31T18:42:20.416Z] > authorizing via signed-in user (wangnelson2@gmail.com)
+[debug] [2022-07-31T18:42:20.416Z] [iam] checking project quasagram-57a30 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-07-31T18:42:20.418Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions [none]
+[debug] [2022-07-31T18:42:20.418Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions x-goog-quota-user=projects/quasagram-57a30
+[debug] [2022-07-31T18:42:20.419Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T18:42:20.608Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions 200
+[debug] [2022-07-31T18:42:20.608Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T18:42:20.609Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-07-31T18:42:20.609Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-07-31T18:42:20.712Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-07-31T18:42:20.712Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-07-31T18:42:20.713Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 [none]
+[debug] [2022-07-31T18:42:20.911Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 200
+[debug] [2022-07-31T18:42:20.912Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 {"projectId":"quasagram-57a30","projectNumber":"300964608650","displayName":"Quasagram","name":"projects/quasagram-57a30","resources":{"hostingSite":"quasagram-57a30","storageBucket":"quasagram-57a30.appspot.com","locationId":"us-east1"},"state":"ACTIVE","etag":"1_3c008763-420d-4e51-92b8-7fc998c8c44b"}
+[info] 
+[info] === Deploying to 'quasagram-57a30'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2022-07-31T18:42:20.964Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at validateString (node:internal/validators:120:11)
+    at Object.join (node:path:429:7)
+    at Config.path (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\config.js:123:45)
+    at getChildEnvironment (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:51:49)
+    at runTargetCommands (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:72:14)
+    at C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:121:24
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async chain (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\index.js:33:9)
+    at async deploy (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\index.js:67:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-07-31T18:48:15.021Z] ----------------------------------------------------------------------
+[debug] [2022-07-31T18:48:15.023Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy --debug
+[debug] [2022-07-31T18:48:15.024Z] CLI Version:   11.4.0
+[debug] [2022-07-31T18:48:15.024Z] Platform:      win32
+[debug] [2022-07-31T18:48:15.024Z] Node Version:  v16.16.0
+[debug] [2022-07-31T18:48:15.025Z] Time:          Sun Jul 31 2022 14:48:15 GMT-0400 (Eastern Daylight Time)
+[debug] [2022-07-31T18:48:15.025Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-07-31T18:48:15.086Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-07-31T18:48:15.087Z] > authorizing via signed-in user (wangnelson2@gmail.com)
+[debug] [2022-07-31T18:48:15.088Z] [iam] checking project quasagram-57a30 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-07-31T18:48:15.090Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions [none]
+[debug] [2022-07-31T18:48:15.090Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions x-goog-quota-user=projects/quasagram-57a30
+[debug] [2022-07-31T18:48:15.091Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T18:48:15.318Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions 200
+[debug] [2022-07-31T18:48:15.318Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/quasagram-57a30:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T18:48:15.318Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-07-31T18:48:15.319Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-07-31T18:48:15.441Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-07-31T18:48:15.442Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/quasagram-57a30/serviceAccounts/quasagram-57a30@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-07-31T18:48:15.443Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 [none]
+[debug] [2022-07-31T18:48:15.700Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 200
+[debug] [2022-07-31T18:48:15.701Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/quasagram-57a30 {"projectId":"quasagram-57a30","projectNumber":"300964608650","displayName":"Quasagram","name":"projects/quasagram-57a30","resources":{"hostingSite":"quasagram-57a30","storageBucket":"quasagram-57a30.appspot.com","locationId":"us-east1"},"state":"ACTIVE","etag":"1_3c008763-420d-4e51-92b8-7fc998c8c44b"}
+[info] 
+[info] === Deploying to 'quasagram-57a30'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2022-07-31T18:48:15.761Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at validateString (node:internal/validators:120:11)
+    at Object.join (node:path:429:7)
+    at Config.path (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\config.js:123:45)
+    at getChildEnvironment (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:51:49)
+    at runTargetCommands (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:72:14)
+    at C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\lifecycleHooks.js:121:24
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async chain (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\index.js:33:9)
+    at async deploy (C:\Users\wangn\AppData\Roaming\nvm\v16.16.0\node_modules\firebase-tools\lib\deploy\index.js:67:5)
+[error] 
+[error] Error: An unexpected error has occurred.
