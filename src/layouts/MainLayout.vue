@@ -46,7 +46,7 @@
               <template v-slot:action>
                 <q-btn @click="installApp" flat class="q-px" label="Yes" />
                 <q-btn flat class="q-px" label="Later" />
-                <q-btn flat class="q-px" label="Never" />
+                <q-btn  @click="neverShowAppInstallBanner" flat class="q-px" label="Never" />
               </template>
             </q-banner>
           </div>
@@ -70,6 +70,9 @@
 </template>
 
 <script>
+
+let deferredPrompt;
+
 export default {
   name: "MainLayout",
 
@@ -85,19 +88,26 @@ export default {
       deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === "accepted") {
           console.log("User accepted the install prompt");
+          this.neverShowAppInstallBanner()
         } else {
           console.log("User dismissed the install prompt");
         }
       });
     },
+    neverShowAppInstallBanner(){
+      this.showAppInstallBanner = false
+      this.$q.localStorage.set('neverShowAppInstallBanner', true)
+
+    }
   },
 
   mounted() {
-    let deferredPrompt;
+    this.$q.localStorage.getItem('neverShowAppInstallBanner')
+    
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      showInstallPromotion();
+      this.showAppInstallBanner = true
     });
   },
 };
