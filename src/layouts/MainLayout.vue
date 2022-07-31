@@ -28,30 +28,46 @@
     </q-header>
 
     <q-footer class="bg-white" bordered>
-      <div class="banner-container bg-primary" v-if="showAppInstallBanner">
-        <div class="banner-container bg-primary">
-          <div class="constrain">
-            <q-banner inline-actions class="bg-primary text-white" dense>
-              <template v-slot:avatar>
-                <q-avatar
-                  color="white"
-                  icon="eva-camera-outline"
-                  text-color="grey-10"
-                  font-size="22px"
-                />
-              </template>
+      <transition
+        appear
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+      >
+        <div class="banner-container bg-primary" v-if="showAppInstallBanner">
+          <div class="banner-container bg-primary">
+            <div class="constrain">
+              <q-banner inline-actions class="bg-primary text-white" dense>
+                <template v-slot:avatar>
+                  <q-avatar
+                    color="white"
+                    icon="eva-camera-outline"
+                    text-color="grey-10"
+                    font-size="22px"
+                  />
+                </template>
 
-              <b>Install Quasagram?</b>
+                <b>Install Quasagram?</b>
 
-              <template v-slot:action>
-                <q-btn @click="installApp" flat class="q-px" label="Yes" />
-                <q-btn flat class="q-px" label="Later" />
-                <q-btn  @click="neverShowAppInstallBanner" flat class="q-px" label="Never" />
-              </template>
-            </q-banner>
+                <template v-slot:action>
+                  <q-btn
+                    @click="showAppInstallBanner"
+                    flat
+                    class="q-px"
+                    label="Yes"
+                  />
+                  <q-btn flat class="q-px" label="Later" />
+                  <q-btn
+                    @click="neverShowAppInstallBanner"
+                    flat
+                    class="q-px"
+                    label="Never"
+                  />
+                </template>
+              </q-banner>
+            </div>
           </div>
         </div>
-      </div>
+      </transition>
 
       <q-tabs
         class="text-grey-10 small-screen-only"
@@ -70,7 +86,6 @@
 </template>
 
 <script>
-
 let deferredPrompt;
 
 export default {
@@ -88,27 +103,32 @@ export default {
       deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === "accepted") {
           console.log("User accepted the install prompt");
-          this.neverShowAppInstallBanner()
+          this.neverShowAppInstallBanner();
         } else {
           console.log("User dismissed the install prompt");
         }
       });
     },
-    neverShowAppInstallBanner(){
-      this.showAppInstallBanner = false
-      this.$q.localStorage.set('neverShowAppInstallBanner', true)
-
-    }
+    neverShowAppInstallBanner() {
+      this.showAppInstallBanner = false;
+      this.$q.localStorage.set("neverShowAppInstallBanner", true);
+    },
   },
 
   mounted() {
-    this.$q.localStorage.getItem('neverShowAppInstallBanner')
-    
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      this.showAppInstallBanner = true
-    });
+    let neverShowAppInstallBanner = this.$q.localStorage.getItem(
+      "neverShowAppInstallBanner"
+    );
+    if (!neverShowAppInstallBanner) {
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        setTimeout(() => {
+
+        }, 1000)
+        this.showAppInstallBanner = true;
+      });
+    }
   },
 };
 </script>
