@@ -28,26 +28,28 @@
     </q-header>
 
     <q-footer class="bg-white" bordered>
-      <div class="banner-container bg-primary">
-        <div class="constrain">
-          <q-banner inline-actions class="bg-primary text-white" dense>
-            <template v-slot:avatar>
-              <q-avatar
-                color="white"
-                icon="eva-camera-outline"
-                text-color="grey-10"
-                font-size="22px"
-              />
-            </template>
+      <div class="banner-container bg-primary" v-if="showAppInstallBanner">
+        <div class="banner-container bg-primary">
+          <div class="constrain">
+            <q-banner inline-actions class="bg-primary text-white" dense>
+              <template v-slot:avatar>
+                <q-avatar
+                  color="white"
+                  icon="eva-camera-outline"
+                  text-color="grey-10"
+                  font-size="22px"
+                />
+              </template>
 
-            <b>Install Quasagram?</b>
+              <b>Install Quasagram?</b>
 
-            <template v-slot:action>
-              <q-btn flat class="q-px" label="Yes" />
-              <q-btn flat class="q-px" label="Later" />
-              <q-btn flat class="q-px" label="Never" />
-            </template>
-          </q-banner>
+              <template v-slot:action>
+                <q-btn @click="installApp" flat class="q-px" label="Yes" />
+                <q-btn flat class="q-px" label="Later" />
+                <q-btn flat class="q-px" label="Never" />
+              </template>
+            </q-banner>
+          </div>
         </div>
       </div>
 
@@ -72,7 +74,31 @@ export default {
   name: "MainLayout",
 
   data() {
-    return {};
+    return {
+      showAppInstallBanner: false,
+    };
+  },
+  methods: {
+    installApp() {
+      this.showAppInstallBanner = false;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the install prompt");
+        } else {
+          console.log("User dismissed the install prompt");
+        }
+      });
+    },
+  },
+
+  mounted() {
+    let deferredPrompt;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      showInstallPromotion();
+    });
   },
 };
 </script>
