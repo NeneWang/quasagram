@@ -8,19 +8,18 @@
  dependencies
 */
 
-import {precacheAndRoute} from 'workbox-precaching';
-import {registerRoute} from 'workbox-routing';
-import {StaleWhileRevalidate} from 'workbox-strategies';
-
-registerRoute(
-  ({url}) => url.pathname.startsWith('/images/avatars/'),
-  new StaleWhileRevalidate()
-);
-
+import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { StaleWhileRevalidate } from 'workbox-strategies';
 
 precacheAndRoute(self.__WB_MANIFEST);
 
+registerRoute(
+    ({ url }) => {
+        return url.pathname.startsWith('http')
+    },
+    new StaleWhileRevalidate()
+);
 
-// console.log("Custom Service Worker")
 
 
