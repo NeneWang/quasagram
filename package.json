@@ -17,7 +17,6 @@
     "firebase-admin": "^11.0.0",
     "md-gum-polyfill": "^1.0.0",
     "quasar": "^1.0.0",
-    "react-dev-utils": "^10.0.0",
     "sharp": "^0.30.7"
   },
   "devDependencies": {

@@ -9,10 +9,18 @@
 */
 
 import {precacheAndRoute} from 'workbox-precaching';
+import {registerRoute} from 'workbox-routing';
+import {StaleWhileRevalidate} from 'workbox-strategies';
+
+registerRoute(
+  ({url}) => url.pathname.startsWith('/images/avatars/'),
+  new StaleWhileRevalidate()
+);
+
 
 precacheAndRoute(self.__WB_MANIFEST);
 
 
-console.log("Custom Service Worker")
+// console.log("Custom Service Worker")
 
 
