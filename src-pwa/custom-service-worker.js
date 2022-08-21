@@ -42,6 +42,11 @@ registerRoute(
   })
 );
 
+let backgroundSyncSupported = 'sync' in self.registration ? true: false
+console.log('backgroundSyncSupported: ', backgroundSyncSupported)
+
+console.log("Is this even Running")
+
 registerRoute(
   ({url}) => url.pathname.startsWith('/posts'),
   new NetworkFirst()
