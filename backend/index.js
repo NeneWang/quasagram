@@ -82,8 +82,6 @@ app.post('/createPost', (req, res) => {
             console.log(`File [${name}] got ${data.length} bytes`);
         }).on('close', () => {
             console.log(`File [${name}] done`);
-
-
         });
     });
 
